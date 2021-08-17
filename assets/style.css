@@ -1,0 +1,43 @@
+.navbar {
+ background-color: #588B8B;
+ width: 100%;
+ border: solid black 2px;
+}
+
+.ms-auto {
+ padding-right: 2%;
+}
+
+.me-auto {
+ padding-left: 2%;
+}
+
+body {
+ background-color: #FFFFFF;
+}
+
+.card {
+ background-color: #FFD5C2;
+ height: 75%;
+ width: 50%;
+ margin: 0 auto;
+ margin-top: 20%;
+ padding: 5%;
+}
+
+
+button, .btn {
+ border: black solid 2px;
+ background-color: #C8553D;
+ color: #FFFFFF;
+ padding: 5px 5px 5px 5px;
+ font-size: larger;
+ padding: 10px 16px 10px 16px;
+ margin: 10px;
+}
+
+button:hover {
+ transition-duration: 0.5s;
+ background-color: #F28F3B;
+ box-shadow: 3px 3px 3px #FFFFFF;
+}
