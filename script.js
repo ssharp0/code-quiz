@@ -85,6 +85,7 @@ function endQuiz() {
 
 }
 
+// function to submit the score to local storage - test and delete once done
 function submitScore() {
 
   localStorage.setItem('quizscore', score)
