@@ -84,24 +84,37 @@ function endQuiz() {
 
 }
 
+function submitScore() {
+
+  localStorage.setItem('quizscore', score)
+  localStorage.setItem('quizscoreInitials', document.getElementById('initials').value)
+
+  if (document.getElementById('initials').value === '') {
+    return false;
+  } else {
+    let savedHighScores = JSON.parse(localStorage.getItem('savedHighScores')) || [];
+    let userInitials = document.getElementById('initials').value
+    let currentHighScore = {
+      name: userInitials,
+      score: score
+    };
+    savedHighScores.push(currentHighScore);
+    localStorage.setItem("savedHighScores", JSON.stringify(savedHighScores))
+  }
+  getScore()
+}
+
 function getScore() {
   let quizContent = `
   <h2>` + localStorage.getItem('quizscoreInitials') + ` : score is...</h2>
   <h1>` + localStorage.getItem('quizscore') + `</h1><br>
   
   <button class="clearScoreBtn">Clear Score!</button>
-  <button class="resetQuizBtn">Play Again!</button>`
+  <button class="resetQuizBtn">Play Again!</button>
+  <button class="viewScoresBtn">View Scores</button>`
 
   quizBody.innerHTML = quizContent;
 }
-
-
-// function clearScore() {
-//   localStorage.setItem('quizscoreName', '')
-//   localStorage.setItem('quizscore', '')
-//   resetQuiz();
-// }
-
 
 function resetQuiz() {
   clearInterval(timer);
@@ -118,12 +131,51 @@ function resetQuiz() {
    <h1>
     Welcome to the Quiz!
    </h1>
-   <button id="startBtn">Start</button>
+   <button class="startBtnReplay">Start</button>
   </div>
   `
 
   document.getElementById('quizBody').innerHTML = quizBodyStart
 
+}
+
+function viewScoreBoard() {
+
+  let quizcontent = `
+  <div class="container highScoreContainer"
+    <div class= "row">
+      <div class="col-sm">
+        Initials
+        <div id="highScoreInitialsDisplay"></div>
+      </div>
+      <div class="col-sm">
+        Score
+        <div id="highScoreScoreDisplay"></div>
+      </div>
+    </div>
+
+  </div>
+  `
+
+  quizBody.innerHTML = quizcontent
+
+  highScoreInitialsDisplay = document.getElementById('highScoreInitialsDisplay')
+  highScoreScoreDisplay = document.getElementById('highScoreScoreDisplay')
+
+  highScoreInitialsDisplay.innerHTML = '';
+  highScoreScoreDisplay.innerHTML = '';
+
+  let scoreBoard = JSON.parse(localStorage.getItem("savedHighScores")) || []
+  for (let i = 0; i < scoreBoard.length; i++) {
+    let nameSpan = document.createElement('li')
+    let newScore = document.createElement('li')
+
+    nameSpan.textContent = scoreBoard[i].name;
+    newScore.textContent = scoreBoard[i].score;
+
+    highScoreInitialsDisplay.appendChild(nameSpan);
+    highScoreScoreDisplay.appendChild(newScore)
+  }
 }
 
 
@@ -165,23 +217,24 @@ function nextQuestion() {
 }
 
 
+startQuizBtn.addEventListener('click', startQuiz)
 
-startQuizBtn.addEventListener("click", startQuiz)
 
 document.addEventListener('click', event => {
   if (event.target.classList.contains('submitScoreBtn')) {
-    localStorage.setItem('quizscore', score)
-    localStorage.setItem('quizscoreInitials', document.getElementById('initials').value)
-    getScore();
+    submitScore();
   } else if (event.target.classList.contains('clearScoreBtn')) {
     localStorage.setItem('quizscoreInitials', '')
     localStorage.setItem('quizscore', '')
   } else if (event.target.classList.contains('resetQuizBtn')) {
     resetQuiz();
+  } else if (event.target.classList.contains('startBtnReplay')) {
+    startQuiz();
+  } else if (event.target.classList.contains('viewScoresBtn')) {
+    viewScoreBoard();
   }
 })
 
-// look into reset quiz so that process can restart again (spell out doc listener)
 
 
 
