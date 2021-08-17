@@ -34,6 +34,7 @@ let timeLeft = ''
 let timer = ''
 
 let startQuizBtn = document.getElementById("startBtn")
+let viewScoresNavBtn = document.getElementById('viewScoresNavBtn')
 
 let quizTimer = document.getElementById("timeLeft")
 let quizBody = document.getElementById('quizBody')
@@ -53,7 +54,7 @@ function startQuiz() {
     // reduce time left by 1 second
     timeLeft--;
     // add the time left (seconds) to the timeLeft element on the html page so user can see clock count
-    quizTimer.innerHTML = `Time Left: ${timeLeft}`;
+    quizTimer.innerHTML = `${timeLeft}`;
 
     // if the timeLeft is less than or equal to 0 then clear the timer and call the function to end the quiz
     if (timeLeft <= 0) {
@@ -74,10 +75,10 @@ function endQuiz() {
   let questionsLength = questions.length
 
   let quizContent = `
- <h2>Quiz Done!</h2>
- <h3> You had a score: ${score} answers correct out of a total of ${questionsLength} questions</h3>
- <input type="text" id="initials" placeholder="Type your initials here...">
- <button class="submitScoreBtn">Submit your score!</button>
+  <h2>Quiz Done!</h2>
+  <h3> You had a score: ${score} answers correct out of a total of ${questionsLength} questions</h3>
+  <input type="text" id="initials" placeholder="Type your initials here...">
+  <button class="submitScoreBtn">Submit your score!</button>
  `;
 
   quizBody.innerHTML = quizContent;
@@ -90,6 +91,7 @@ function submitScore() {
   localStorage.setItem('quizscoreInitials', document.getElementById('initials').value)
 
   if (document.getElementById('initials').value === '') {
+    alert("Please enter initials to submit score")
     return false;
   } else {
     let savedHighScores = JSON.parse(localStorage.getItem('savedHighScores')) || [];
@@ -101,19 +103,7 @@ function submitScore() {
     savedHighScores.push(currentHighScore);
     localStorage.setItem("savedHighScores", JSON.stringify(savedHighScores))
   }
-  getScore()
-}
-
-function getScore() {
-  let quizContent = `
-  <h2>` + localStorage.getItem('quizscoreInitials') + ` : score is...</h2>
-  <h1>` + localStorage.getItem('quizscore') + `</h1><br>
-  
-  <button class="clearScoreBtn">Clear Score!</button>
-  <button class="resetQuizBtn">Play Again!</button>
-  <button class="viewScoresBtn">View Scores</button>`
-
-  quizBody.innerHTML = quizContent;
+  viewScoreBoard();
 }
 
 function resetQuiz() {
@@ -142,19 +132,24 @@ function resetQuiz() {
 function viewScoreBoard() {
 
   let quizcontent = `
-  <div class="container highScoreContainer"
+  <div class="container highScoreContainer">
     <div class= "row">
       <div class="col-sm">
-        Initials
+        <strong>Initials</strong>
         <div id="highScoreInitialsDisplay"></div>
       </div>
       <div class="col-sm">
-        Score
+        <strong>Score</strong>
         <div id="highScoreScoreDisplay"></div>
       </div>
     </div>
 
   </div>
+
+  <hr>
+  <button class="clearScoreBtn">Clear Score!</button>
+  <button class="resetQuizBtn">Play Again!</button>
+  <hr>
   `
 
   quizBody.innerHTML = quizcontent
@@ -219,6 +214,8 @@ function nextQuestion() {
 
 startQuizBtn.addEventListener('click', startQuiz)
 
+viewScoresNavBtn.addEventListener('click', viewScoreBoard)
+
 
 document.addEventListener('click', event => {
   if (event.target.classList.contains('submitScoreBtn')) {
@@ -230,8 +227,6 @@ document.addEventListener('click', event => {
     resetQuiz();
   } else if (event.target.classList.contains('startBtnReplay')) {
     startQuiz();
-  } else if (event.target.classList.contains('viewScoresBtn')) {
-    viewScoreBoard();
   }
 })
 
