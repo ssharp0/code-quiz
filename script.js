@@ -1,32 +1,32 @@
-// Set up questions (dummy for now and testing). Creating objects for the questions
+// Set up questions
 let questions = [{
-  title: "Question 1",
-  choices: ["a", "b", "c", "d"],
-  answer: "a"
+  title: "Which of the following types of variables is visible everywhere in JavaScript code?",
+  choices: ["Local Variable", "Global Variable", "Both Local & Global Variables", "None of these"],
+  answer: "Global Variable"
 },
 {
-  title: "Question 2",
-  choices: ["a", "b", "c", "d"],
-  answer: "b"
+  title: "Which of the following function of String object extracts section of a string and returns a new string?",
+  choices: ["slice()", "search()", "match()", "replace()"],
+  answer: "slice()"
 },
 {
-  title: "Question 3",
-  choices: ["a", "b", "c", "d"],
-  answer: "c"
+  title: "Inside which HTML element tag do we put the JavaScript?",
+  choices: ["js", "script", "javascript", "scripting"],
+  answer: "script"
 },
 {
-  title: "Question 4",
-  choices: ["a", "b", "c", "d"],
-  answer: "d"
+  title: "Is Javascript a case-sensitive language?",
+  choices: ["Yes", "No"],
+  answer: "Yes"
 },
 {
-  title: "Question 5",
-  choices: ["a", "b", "c", "d"],
-  answer: "a"
+  title: "Using ___ statement is how you test for a specific condition:",
+  choices: ["Switch", "For", "If", "Select"],
+  answer: "If"
 },
 ]
 
-// variables for initialization - variables for elements on html for reference throughout
+// global variables for initialization - variables for elements on html for reference throughout
 let score = 0
 let currentQuestion = -1;
 let timeLeft = ''
@@ -177,7 +177,7 @@ function viewScoreBoard() {
   }
 }
 
-// function to clear the scoreboard and call the function to view the scoreboard (refresh)
+// function to clear the scoreboard (clear local storage) and call the function to view the scoreboard (refresh)
 function clearScoreBoard() {
   window.localStorage.clear()
   viewScoreBoard();
