@@ -15,7 +15,7 @@ When all questions are answered or the timer reaches zero, then the quiz is over
 
 The user can see their score and save their initials and score. Initials and scores are saved to local storage. 
 
-The user can view the scoreboard and retake the quiz and compare scores.
+The user can view and/or clear the scoreboard, and retake the quiz and compare scores.
 
 # Link to deployed application: 
 
