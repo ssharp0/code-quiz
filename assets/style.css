@@ -1,9 +1,11 @@
+/* styling for the navbar */
 .navbar {
  background-color: #588B8B;
  width: 100%;
  border: solid black 2px;
 }
 
+/* Add padding for the navbar timer and view scores button */
 .ms-auto {
  padding-right: 2%;
 }
@@ -12,10 +14,12 @@
  padding-left: 2%;
 }
 
+/* Styling for the body */
 body {
  background-color: #FFFFFF;
 }
 
+/* Styling for the quiz card */
 .card {
  background-color: #FFD5C2;
  height: 75%;
@@ -26,12 +30,11 @@ body {
  margin-bottom: 5%;
 }
 
-
+/* Styling for all buttons */
 button, .btn {
  border: black solid 2px;
  background-color: #C8553D;
  color: #FFFFFF;
- padding: 5px 5px 5px 5px;
  font-size: larger;
  padding: 10px 16px 10px 16px;
  margin: 10px;
@@ -43,6 +46,7 @@ button:hover {
  box-shadow: 3px 3px 3px #FFFFFF;
 }
 
+/* Styling for the list items (scores/intials) */
 li {
  padding: 3px;
  color: black;
