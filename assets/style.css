@@ -21,8 +21,9 @@ body {
  height: 75%;
  width: 50%;
  margin: 0 auto;
- margin-top: 20%;
+ margin-top: 5%;
  padding: 5%;
+ margin-bottom: 5%;
 }
 
 
@@ -40,4 +41,10 @@ button:hover {
  transition-duration: 0.5s;
  background-color: #F28F3B;
  box-shadow: 3px 3px 3px #FFFFFF;
+}
+
+li {
+ padding: 3px;
+ color: black;
+ list-style-type: none;
 }
